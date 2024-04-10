@@ -30,7 +30,18 @@ class SecondDegreePolynomialImpl(override val constant: Double,
     secondDegree - polynomial.secondDegree
   )
 
-case class CaseSecondDegreePolynomial(secondDegree: Double, firstDegree: Double, constant: Double)
+case class CaseSecondDegreePolynomial(secondDegree: Double, firstDegree: Double, constant: Double) extends SecondDegreePolynomial:
+  override def +(polynomial: SecondDegreePolynomial): SecondDegreePolynomial = CaseSecondDegreePolynomial(
+    secondDegree + polynomial.secondDegree,
+    firstDegree + polynomial.firstDegree,
+    constant + polynomial.constant
+  )
+
+  override def -(polynomial: SecondDegreePolynomial): SecondDegreePolynomial = CaseSecondDegreePolynomial(
+    secondDegree - polynomial.secondDegree,
+    firstDegree - polynomial.firstDegree,
+    constant - polynomial.constant
+  )
 
 object SecondDegreePolynomial:
   def apply(secondDegree: Double, firstDegree: Double, constant: Double): SecondDegreePolynomial = SecondDegreePolynomialImpl(
@@ -50,8 +61,9 @@ object SecondDegreePolynomial:
 
   val caseSimplePolynomial = CaseSecondDegreePolynomial(1.0, 0, 3)
   val caseAnotherPolynomial = CaseSecondDegreePolynomial(1.0, 0, 3)
-  println(caseSimplePolynomial) // CaseSecondDegreePolynomial(1.0,1.0,3.0
-  println(caseSimplePolynomial == caseAnotherPolynomial) // CaseSecondDegreePolynomial(0.0,1.0,0.0)
+  val caseSum = caseSimplePolynomial + caseAnotherPolynomial
+  println((caseSum, caseSum.secondDegree, caseSum.firstDegree, caseSum.constant))
+  println(caseSimplePolynomial == caseAnotherPolynomial)
 
 /** Hints:
  *   - implement SecondDegreePolynomial with a SecondDegreePolynomialImpl class, similar to PersonImpl in slides
