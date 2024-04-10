@@ -55,7 +55,6 @@ class WarehouseImpl extends Warehouse:
     items = items.concat(Sequence(item))
 
   override def contains(itemCode: Int): Boolean =
-//    items.contains(items.filter(_.code == itemCode).head.orElse(null))
     items.contains(items.find(_.code == itemCode).orElse(null))
 
   override def searchItems(tag: String): Sequence[Item] =
