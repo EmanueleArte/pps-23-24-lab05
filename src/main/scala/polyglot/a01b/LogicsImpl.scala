@@ -34,10 +34,6 @@ class LogicsImpl(private val size: Int, private val mines: Int) extends Logics:
       if minesSet.contains(pair)
     yield pair).size
 
-  private def size(seq: Sequence[Pair[Int, Int]]): Int = seq match
-    case Cons(_, tail) => 1 + size(tail)
-    case empty => 0
-
   def hit(x: Int, y: Int): java.util.Optional[Integer] =
     if minesSet.contains(Pair(x, y)) then
       OptionToOptional(ScalaOptional.Empty()) // Option => Optional converter
@@ -46,4 +42,4 @@ class LogicsImpl(private val size: Int, private val mines: Int) extends Logics:
       OptionToOptional(ScalaOptional.Just(neighbours(x, y)))
 
   def won: Boolean =
-    size(selected) + size(minesSet) == gridSize
+    selected.size + minesSet.size == gridSize

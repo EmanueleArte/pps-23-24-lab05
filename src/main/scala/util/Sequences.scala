@@ -1,9 +1,10 @@
 package util
+
 import Optionals.Optional.*
 import util.Optionals.Optional
 
 object Sequences: // Essentially, generic linkedlists
-  
+
   enum Sequence[E]:
     case Cons(head: E, tail: Sequence[E])
     case Nil()
@@ -51,8 +52,13 @@ object Sequences: // Essentially, generic linkedlists
       def reverse(): Sequence[A] = sequence match
         case Cons(h, t) => t.reverse().concat(Cons(h, Nil()))
         case _ => Nil()
+
+      def size: Int = sequence match
+        case Cons(_, t) => 1 + t.size
+        case _ => 0
+
 @main def trySequences =
-  import Sequences.* 
+  import Sequences.*
   val sequence = Sequence(1, 2, 3)
   println(sequence)
   println(sequence.head)
